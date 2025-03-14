@@ -13,6 +13,7 @@ public class Post {
     private String title;
     private String content;
     private Integer likes;
+    
     private List<Comment> comments = new ArrayList<>();
 
     public Post() {
