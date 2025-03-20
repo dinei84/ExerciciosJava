@@ -2,12 +2,12 @@ package entities;
 
 public class Guerreiro {
     private String raca;
-    private Double poderDeLuta;
+    private Integer poderDeLuta;
     private String golpeEspecial;
     private String nome;
 
 
-    public Guerreiro(String raca, Double poderDeLuta, String golpeEspecial, String nome) {
+    public Guerreiro(String raca, Integer poderDeLuta, String golpeEspecial, String nome) {
         this.raca = raca;
         this.poderDeLuta = poderDeLuta;
         this.golpeEspecial = golpeEspecial;
@@ -22,11 +22,11 @@ public class Guerreiro {
         this.raca = raca;
     }
 
-    public Double getPoderDeLuta() {
+    public Integer getPoderDeLuta() {
         return poderDeLuta;
     }
 
-    public void setPoderDeLuta(Double poderDeLuta) {
+    public void setPoderDeLuta(Integer poderDeLuta) {
         this.poderDeLuta = poderDeLuta;
     }
 
@@ -46,12 +46,14 @@ public class Guerreiro {
         this.nome = nome;
     }
 
-    @Override
-    public String toString() {
-        return "Guerreiro: " +
-                "\nNome: " + nome +
-                "\nRaça: " + raca + '\'' +
-                "\nPoderDeLuta: " + poderDeLuta +
-                "\nGolpeEspecial: " + golpeEspecial ;
-    }
+    // @Override
+    // public String toString() {
+    //     return  "\n" + 
+    //             "Guerreiro: " +                
+    //             "\nNome: " + nome +
+    //             "\nRaça: " + raca + '\'' +
+    //             "\nPoderDeLuta: " + poderDeLuta +
+    //             "\nGolpeEspecial: " + golpeEspecial + 
+    //             "\n-------------------------------------";
+    // }
 }

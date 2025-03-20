@@ -5,7 +5,7 @@ public class Saiajin extends Guerreiro{
     private String origem;
 
 
-    public Saiajin(String raca, Double poderDeLuta, String golpeEspecial, int nivel, String origem, String nome) {
+    public Saiajin(String raca, Integer poderDeLuta, String golpeEspecial, int nivel, String origem, String nome) {
         super(raca, poderDeLuta, golpeEspecial, nome);
 
         this.nivel = nivel;
@@ -31,12 +31,27 @@ public class Saiajin extends Guerreiro{
 
     public void trasnformacao(int nivel){
         this.nivel += 1;
+        if (nivel == 1) {
+            this.setPoderDeLuta((int)(this.getPoderDeLuta() + 50000.0));
+            System.out.println("SupeSaiajin nivel 1");
+        }else if (nivel == 2) {
+            this.setPoderDeLuta((int)(this.getPoderDeLuta() + 60000.0));
+            System.out.println("SupeSaiajin nivel 2");
+        }else if (nivel == 3) {
+            this.setPoderDeLuta((int)(this.getPoderDeLuta() + 70000.0));
+            System.out.println("SuperSaiajin nivel 3");
+        }
     }
 
     @Override
     public String toString() {
-        return "Saiajin: " +
-                "\nNivel: " + nivel +
-                "\nOrigem: " + origem;
+        return "\n" +
+            "\nGuerreiro: " + 
+            "\nNome: " + this.getNome() +
+            "\nRaça: " + this.getRaca() +
+            "\nPoder de Luta: " + this.getPoderDeLuta() +
+            "\nGolpe especial: " + this.getGolpeEspecial() +
+            "\nNivel: " + nivel +
+            "\nOrigem: " + origem;
     }
 }
