@@ -46,6 +46,12 @@ public class Guerreiro {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "\nVilão:  \nRaça: " + raca + "\nPoderDeLuta: " + poderDeLuta + "\nGolpeEspecial: " + golpeEspecial
+                + "\nNome: " + nome + " \n___________________________";
+    }
+
     // @Override
     // public String toString() {
     //     return  "\n" + 
@@ -56,4 +62,6 @@ public class Guerreiro {
     //             "\nGolpeEspecial: " + golpeEspecial + 
     //             "\n-------------------------------------";
     // }
+
+    
 }

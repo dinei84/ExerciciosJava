@@ -4,6 +4,7 @@ import entities.Guerreiro;
 import entities.Humanos;
 import entities.Namecuseijin;
 import entities.Saiajin;
+import entities.Viloes;
 
 import java.util.Scanner;
 
@@ -23,6 +24,8 @@ public class Program {
         Humanos iancha = new Humanos("Humanos", 4200, "Golpe do Lobo", "Iancha", "Kame");
         Humanos tenshinhan = new Humanos("Humanos", 5000, "Kikohan", "Tenshinhan", "Tsuru-Sen'nin");
 
+        Viloes napa = new Viloes("Sayajin", 2500, "Super Força", "Napa");
+
         System.out.println(goku);
         System.out.println(vegita);
         System.out.println(gohan);
@@ -36,6 +39,8 @@ public class Program {
         System.out.println(kuririn);
         System.out.println(iancha);
         System.out.println(tenshinhan);
+
+        System.out.println(napa);
 
         sc.close();
     }
