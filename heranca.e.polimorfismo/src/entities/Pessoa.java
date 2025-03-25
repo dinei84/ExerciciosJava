@@ -1,6 +1,6 @@
-package entities;
+  package entities;
 
-public class Pessoa {
+public abstract  class Pessoa {
     private String nome;
     private int idade;
     private String sexo;
@@ -34,4 +34,9 @@ public class Pessoa {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+    public final void fazerAniversario() {
+        this.idade++;
+    }
 }
+  
