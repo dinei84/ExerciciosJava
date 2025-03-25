@@ -1,14 +1,17 @@
-  package entities;
+  package application;
 
-public abstract  class Pessoa {
-    private String nome;
-    private int idade;
-    private String sexo;
+public abstract class Pessoa {
+    protected String nome;
+    protected int idade;
+    protected String sexo;
     
     public Pessoa(String nome, int idade, String sexo) {
         this.nome = nome;
         this.idade = idade;
         this.sexo = sexo;
+    }
+    public Pessoa(){
+        
     }
 
     public String getNome() {
@@ -38,5 +41,11 @@ public abstract  class Pessoa {
     public final void fazerAniversario() {
         this.idade++;
     }
+    @Override
+    public String toString() {
+        return "Dados \nNome: " + nome + "\nIdade: " + idade + "\nSexo: " + sexo + "\n--------------------------";
+    }
+
+    
 }
   

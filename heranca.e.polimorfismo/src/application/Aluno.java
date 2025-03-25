@@ -1,4 +1,4 @@
-package entities; 
+package application; 
 
 public class Aluno extends Pessoa{
 
@@ -28,6 +28,6 @@ public class Aluno extends Pessoa{
     }
 
     public void pagarMensalidade(){
-        System.out.println("Pagando mensalidade do aluno " + this.getNome());
+        System.out.println("Pagando mensalidade do aluno " + this.nome);
     }
 }
