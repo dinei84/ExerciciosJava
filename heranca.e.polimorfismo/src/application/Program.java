@@ -22,9 +22,7 @@ public class Program {
 
         // System.out.println(b1);
 
-        Tecnico t1 = new Tecnico("Vinicius", 12, "Masculino", 1115, "Ciencias da computação");
         
-        System.out.println(t1);
 
 
     }
