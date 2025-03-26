@@ -24,6 +24,11 @@ public class ContaNegocios extends Conta{
         if (quantidade <= limiteDeEmprestimo){
             saldo += quantidade - 10.0;
         }
+    }
 
+    @Override
+    public void retirada(double quantidade){
+        super.retirada(quantidade);
+        saldo -= 2;
     }
 }

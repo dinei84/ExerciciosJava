@@ -7,31 +7,27 @@ import entities.ContaPoupanca;
 public class Program {
     public static void main(String[] args) {
 
-        Conta acc = new Conta(115,"Dinei", 1500.0 );
-        ContaNegocios bacc = new ContaNegocios(1002, "Fernanda", 0.0, 500.0);
+        Conta conta1 = new Conta(1005,"Dinei", 5000.0);
+        System.out.println("Saldo da Conta Corrente: " + conta1.getSaldo());
+        System.out.println("-----------------");
+        conta1.retirada(500);
+        System.out.println("Saque da Conta Corrente: " + conta1.getSaldo());
 
-        //UPCASTING
+        System.out.println("==================================================");
 
-        Conta acc1 = bacc;
-        Conta acc2 = new ContaNegocios(1003, "Vini", 1500.0, 2000.0);
-        Conta acc3 = new ContaPoupanca(1004, "Felipe", 2500.0, 0.5);
+        Conta contap = new ContaPoupanca(1010, "Fernanda", 2500.0, 12.0);
+        System.out.println("Saque da Conta Poupança: " + contap.getSaldo());
+        System.out.println("------------------");
+        contap.retirada(250.0);
+        System.out.println("Saque da Conta Poupança: " + contap.getSaldo());
 
-        //DOWCASTING
+        System.out.println("==================================================");
 
-        ContaNegocios acc4 = (ContaNegocios) acc2;
-        acc4.emprestimo(100);
-
-        //ContaNegocios acc5 = (ContaNegocios) acc3;
-        if (acc3 instanceof ContaNegocios) {
-            ContaNegocios acc5 = (ContaNegocios) acc3;
-            acc5.emprestimo(100.0);
-            System.out.println("Emprestado");
-        }
-        if (acc3 instanceof ContaPoupanca){
-            ContaPoupanca acc5 = (ContaPoupanca) acc3;
-            acc5.atualizaSaldo();
-            System.out.println("Atualizado");
-        }
+        Conta contabusi = new ContaNegocios(1010, "Felipe", 3500.0, 1000.0);
+        System.out.println("Saldo da Conta Business: " + contabusi.getSaldo());
+        System.out.println("-------------------");
+        contabusi.retirada(1000.0);
+        System.out.println("Saque da conta Business: " + contabusi.getSaldo());
 
     }
 }

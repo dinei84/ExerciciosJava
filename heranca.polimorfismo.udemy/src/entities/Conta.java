@@ -34,7 +34,7 @@ public class Conta {
     }
 
     public void retirada(double quantidade){
-        saldo -= quantidade ;
+        saldo -= quantidade + 5.0;
     }
     public void deposito( double quantidade){
         saldo += quantidade;
