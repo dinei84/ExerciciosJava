@@ -22,8 +22,11 @@ public class Program {
 
         // System.out.println(b1);
 
-        
+        //  Tecnico t1 = new Tecnico("Vini", 11, "masculino", 1114, "Engenharia de Softwere", 115);
+        //  t1.praticar();
+        //  System.out.println(t1);
 
-
+        //  Visitante v1 = new Visitante("Felipe", 8, "Masculino");
+        //  System.out.println(v1);
     }
 }

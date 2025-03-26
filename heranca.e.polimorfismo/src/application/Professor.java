@@ -1,4 +1,4 @@
-package entities;
+package application;
 
 public class Professor extends Pessoa{
     private String especialidade;
