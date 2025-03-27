@@ -3,27 +3,36 @@ package application;
 import entities.Funcionario;
 import entities.FuncionarioTerceirizado;
 
+import java.util.Locale;
+import java.util.Scanner;
+
 public class Program {
     public static void main(String[] args) {
-        FuncionarioTerceirizado dinei = new FuncionarioTerceirizado();
-        dinei.setNome("Dinei");
-        dinei.setHoras(100);
-        dinei.setValorPorHora(15.0);
-        dinei.setDespesasAdicionais(200.0);
+        Scanner sc = new Scanner(System.in);
+        Locale.setDefault(Locale.US);
 
-        System.out.println(dinei);
+        System.out.println("Quantos funcionarios quer calcular: ");
+        int numero = sc.nextInt();
 
-//        Funcionario fernanda = new Funcionario();
-//        fernanda.setNome("Fernanda");
-//        fernanda.setHoras(50);
-//        fernanda.setValorPorHora(20.0);
-//
-//        System.out.println(fernanda);
-
-
-
-
+        for (int i = 0; i < numero; i++) {
+            System.out.print("Dados do funcionario " + (i + 1) + "°");
+            System.out.println("Digite y se o funcionario for Terceirizado, ou n se for Funcionario comum: ");
+            String tipo = sc.next().charAt(0);
+            if (tipo.equals('y')){
+                System.out.print("Nome: ");
+                String nome = sc.next();
+                System.out.print("Horas: ");
+                int horas = sc.nextInt();
+            }
 
 
+        }
+
+
+
+
+
+
+        sc.close();
     }
 }
