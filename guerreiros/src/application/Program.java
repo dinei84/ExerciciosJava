@@ -1,47 +1,35 @@
 package application;
 
-import entities.Guerreiro;
-import entities.Humanos;
-import entities.Namecuseijin;
-import entities.Saiajin;
-import entities.Viloes;
-
+import entities.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        Saiajin goku = new Saiajin("Sayajin", 1000, "Kamehameha", 2, "Planeta Vegita", "Goku");
-        Saiajin vegita = new Saiajin("Sayajin", 1000, "Alvorecer do Dia", 2, "Planeta Vegita", "Vegita");
-        Saiajin gohan = new Saiajin("Saiajin", 2500, "Mazenko", 2, "Terra", "Gohan");
-        Saiajin tranksdofuturo = new Saiajin("Saiajin", 2000, "Ataque de Espada Brilhante", 1, "Futuro", "Trunks");
+        System.out.println("--- Bem-vindo ao Jogo de Luta Dragon Ball Z (Terminal) ---");
 
-        Namecuseijin picolo = new Namecuseijin("Namecusaijim", 5000, "Aquencosapo", 1200, "Regeneração", "Picollo");
-        Namecuseijin dende = new Namecuseijin("Namecuseijin", 100, "Não possui", 200, "Cura", "Dende");
+        System.out.print("Digite o nome do Jogador 1: ");
+        String jogador1 = scanner.nextLine();
 
-        Humanos kuririn = new Humanos("Humanos", 3500, "Kiensan", "Kuririn", "Kame");
-        Humanos iancha = new Humanos("Humanos", 4200, "Golpe do Lobo", "Iancha", "Kame");
-        Humanos tenshinhan = new Humanos("Humanos", 5000, "Kikohan", "Tenshinhan", "Tsuru-Sen'nin");
+        System.out.print("Digite o nome do Jogador 2: ");
+        String jogador2 = scanner.nextLine();
 
-        Viloes napa = new Viloes("Sayajin", 2500, "Super Força", "Napa");
+        Luta luta = new Luta(jogador1, jogador2);
 
-        System.out.println(goku);
-        System.out.println(vegita);
-        System.out.println(gohan);
-        System.out.println(tranksdofuturo);
+        // Criando os personagens disponíveis
+        List<Guerreiro> personagens = new ArrayList<>();
+        personagens.add(new Saiyajin("Goku", 100, 30, 15, "Planeta Vegeta"));
+        personagens.add(new Saiyajin("Vegeta", 90, 28, 18, "Planeta Vegeta"));
+        personagens.add(new Humano("Kuririn", 70, 15, 10, "Kienzan"));
+        personagens.add(new Namekiano("Piccolo", 85, 25, 12, true));
+        personagens.add(new Guerreiro("Yamcha", 60, 12, 8));
 
+        luta.escolherPersonagens(personagens);
+        luta.iniciarLuta();
 
-        System.out.println(picolo);
-        System.out.println(dende);
-
-
-        System.out.println(kuririn);
-        System.out.println(iancha);
-        System.out.println(tenshinhan);
-
-        System.out.println(napa);
-
-        sc.close();
+        scanner.close();
     }
 }

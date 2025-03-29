@@ -1,67 +1,64 @@
 package entities;
 
 public class Guerreiro {
-    private String raca;
-    private Integer poderDeLuta;
-    private String golpeEspecial;
-    private String nome;
+    protected String nome;
+    protected int vida;
+    protected int poder;
+    protected int defesa;
 
-
-    public Guerreiro(String raca, Integer poderDeLuta, String golpeEspecial, String nome) {
-        this.raca = raca;
-        this.poderDeLuta = poderDeLuta;
-        this.golpeEspecial = golpeEspecial;
+    public Guerreiro(String nome, int vida, int poder, int defesa) {
         this.nome = nome;
-    }
-
-    public String getRaca() {
-        return raca;
-    }
-
-    public void setRaca(String raca) {
-        this.raca = raca;
-    }
-
-    public Integer getPoderDeLuta() {
-        return poderDeLuta;
-    }
-
-    public void setPoderDeLuta(Integer poderDeLuta) {
-        this.poderDeLuta = poderDeLuta;
-    }
-
-    public String getGolpeEspecial() {
-        return golpeEspecial;
-    }
-
-    public void setGolpeEspecial(String golpeEspecial) {
-        this.golpeEspecial = golpeEspecial;
+        this.vida = vida;
+        this.poder = poder;
+        this.defesa = defesa;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public int getVida() {
+        return vida;
     }
 
-    @Override
-    public String toString() {
-        return "\nVilão:  \nRaça: " + raca + "\nPoderDeLuta: " + poderDeLuta + "\nGolpeEspecial: " + golpeEspecial
-                + "\nNome: " + nome + " \n___________________________";
+    public int getPoder() {
+        return poder;
     }
 
-    // @Override
-    // public String toString() {
-    //     return  "\n" + 
-    //             "Guerreiro: " +                
-    //             "\nNome: " + nome +
-    //             "\nRaça: " + raca + '\'' +
-    //             "\nPoderDeLuta: " + poderDeLuta +
-    //             "\nGolpeEspecial: " + golpeEspecial + 
-    //             "\n-------------------------------------";
-    // }
+    public int getDefesa() {
+        return defesa;
+    }
 
-    
+    public void sofrerDano(int dano) {
+        this.vida -= dano;
+        if (this.vida < 0) {
+            this.vida = 0;
+        }
+        System.out.println(this.nome + " sofreu " + dano + " de dano. Vida restante: " + this.vida);
+    }
+
+    public void atacar(Guerreiro alvo){
+        int dano = this.poder - alvo.getDefesa();
+        if (dano < 0){
+            dano = 0;
+        }
+        System.out.println(this.nome + " Ataca" + alvo.getNome() + " e causa" + dano + " de dano");
+    }
+
+    public int defender(){
+        System.out.println(this.nome + " esta defendendo.");
+        return this.defesa + (int) (Math.random() * 10);
+    }
+
+    public void poderEspecial(Guerreiro alvo) {
+        System.out.println(this.nome + " usa um poder especial!");
+        int dano = this.poder * 2 - alvo.getDefesa();
+        if (dano < 0) {
+            dano = 0;
+        }
+        System.out.println(this.nome + " causa " + dano + " de dano com seu poder especial!");
+        alvo.sofrerDano(dano);
+    }
+
+
 }
