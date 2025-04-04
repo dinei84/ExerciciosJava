@@ -4,10 +4,7 @@ import entities.Carro;
 import entities.Moto;
 import entities.Veiculo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Program {
     public static void main(String[] args) {
@@ -18,136 +15,117 @@ public class Program {
         boolean continuar = true;
 
         while (continuar) {
-            System.out.print("O que deseja fazer? Cadastrar(1) / Listar(2) / Simular Aluguel(3) / Sair(4)");
-            int escolha = sc.nextInt();
-            sc.nextLine();
+            try {
+                System.out.print("O que deseja fazer? Cadastrar(1) / Listar(2) / Simular Aluguel(3) / Sair(4) ");
+                int escolha = sc.nextInt();
+                sc.nextLine();
 
-            switch (escolha) {
-                case 1:
-                    System.out.print("Deseja cadastrar: Carro (1) / Moto (2)");
-                    int escolhaVeiculo = sc.nextInt();
-                    sc.nextLine();
+                switch (escolha) {
+                    case 1:
+                        System.out.print("Deseja cadastrar: Carro (1) / Moto (2) ");
+                        int escolhaVeiculo = sc.nextInt();
+                        sc.nextLine();
 
-                    switch (escolhaVeiculo) {
-                        case 1:
-                            System.out.print("Modelo:");
-                            String modelo = sc.nextLine();
+                        switch (escolhaVeiculo) {
+                            case 1:
+                                System.out.print("Modelo: ");
+                                String modelo = sc.nextLine();
 
-                            System.out.print("Marca: ");
-                            String marca = sc.nextLine();
+                                System.out.print("Marca: ");
+                                String marca = sc.nextLine();
 
-                            System.out.print("Ano Fabricação: ");
-                            int anoFabricacao = sc.nextInt();
-                            sc.nextLine();
+                                System.out.print("Ano Fabricação: ");
+                                Integer anoFabricacao = sc.nextInt();
+                                sc.nextLine();
 
-                            System.out.print("Preço base do aluguel: ");
-                            Double precoBase = sc.nextDouble();
-                            sc.nextLine(); // Adicionei para evitar problemas com o nextLine
+                                System.out.print("Preço base do aluguel: ");
+                                Double precoBase = sc.nextDouble();
+                                sc.nextLine();
 
-                            System.out.print("Quantidade de portas: ");
-                            int quantidadePortas = sc.nextInt();
-                            sc.nextLine();
+                                System.out.print("Quantidade de portas: ");
+                                Integer quantidadePortas = sc.nextInt();
+                                sc.nextLine();
 
-                            veiculos.add(new Carro(modelo, marca, anoFabricacao, precoBase, quantidadePortas));
-                            break;
-                        case 2:
-                            System.out.print("Modelo:");
-                            String modeloMoto = sc.nextLine();
+                                veiculos.add(new Carro(modelo, marca, anoFabricacao, precoBase, quantidadePortas));
+                                break;
+                            case 2:
+                                System.out.print("Modelo: ");
+                                String modeloMoto = sc.nextLine();
 
-                            System.out.print("Marca: ");
-                            String marcaMoto = sc.nextLine();
+                                System.out.print("Marca: ");
+                                String marcaMoto = sc.nextLine();
 
-                            System.out.print("Ano Fabricação: ");
-                            int anoFabricacaoMoto = sc.nextInt();
-                            sc.nextLine();
+                                System.out.print("Ano Fabricação: ");
+                                int anoFabricacaoMoto = sc.nextInt();
+                                sc.nextLine();
 
-                            System.out.print("Preço base do aluguel: ");
-                            Double precoBaseMoto = sc.nextDouble();
-                            sc.nextLine();
+                                System.out.print("Preço base do aluguel: ");
+                                Double precoBaseMoto = sc.nextDouble();
+                                sc.nextLine();
 
-                            System.out.print("Cilindrada: ");
-                            int cilindrada = sc.nextInt();
-                            sc.nextLine();
+                                System.out.print("Cilindrada: ");
+                                int cilindrada = sc.nextInt();
+                                sc.nextLine();
 
-                            veiculos.add(new Moto(modeloMoto, marcaMoto, anoFabricacaoMoto, precoBaseMoto, cilindrada));
-                    }
-                    break;
-                case 2:
-                    if (!veiculos.isEmpty()) {
-                        for (Veiculo veiculo : veiculos) {
-                            System.out.println(veiculo);
+                                veiculos.add(new Moto(modeloMoto, marcaMoto, anoFabricacaoMoto, precoBaseMoto, cilindrada));
                         }
-                    } else {
-                        System.out.println("Nenhum veículo cadastrado!");
-                    }
-                    break;
-                case 3:
-                    System.out.println("Quer simular o aluguel de: Carro (1) / Moto (2)");
-                    int escolhaSimulacao = sc.nextInt();
-                    sc.nextLine();
+                        break;
+                    case 2:
+                        try {
+                            if (!veiculos.isEmpty()) {
+                                System.out.println("Listagem Completa: ");
+                                for (Veiculo veiculo : veiculos) {
+                                    System.out.println(veiculo);
+                                }
+                            } else {
+                                System.out.println("Nenhum veículo cadastrado!");
+                            }
+                        } catch (NullPointerException e) {
+                            System.out.println("Não achado!" + new Exception(e));
+                        }
 
-                    switch (escolhaSimulacao) {
-                        case 1:
-                            System.out.print("Modelo do veículo: ");
-                            String modeloSimulacao = sc.nextLine();
+                        break;
+                    case 3:
+                        System.out.print("Qual modelo do veículo quer simular: ");
+                        String modeloBusca = sc.nextLine().trim(); // Remove espaços em branco
 
-                            System.out.print("Marca do veículo: ");
-                            String marcaSimulacao = sc.nextLine();
+                        Veiculo encontrado = null;
+                        for (Veiculo v : veiculos) {
+                            if (v.getModelo() != null && v.getModelo().equalsIgnoreCase(modeloBusca)) {
+                                encontrado = v;
+                                break;
+                            }
+                        }
 
-                            System.out.print("Ano de fabricação: ");
-                            int anoFabricacaoSimulacao = sc.nextInt();
-                            sc.nextLine();
+                        if (encontrado != null) {
+                            try {
+                                System.out.print("Por quantos dias quer alugar: ");
+                                int diasAlugado = sc.nextInt();
+                                sc.nextLine(); // Consume newline left-over
 
-                            System.out.print("Preço Base: ");
-                            Double precoBaseSimulacao = sc.nextDouble();
-                            sc.nextLine(); 
+                                Double valor = encontrado.calcularAluguel(diasAlugado);
+                                System.out.printf("O valor do aluguel do veículo: %s, por %d dias, é: %.2f %n", encontrado.getModelo(), diasAlugado, valor);
+                            } catch (NullPointerException e) {
+                                System.out.println("Erro ao calcular aluguel. Verifique os dados do veículo.");
+                            } catch (Exception e) {
+                                System.out.println("Erro inesperado: " + e.getMessage());
+                            }
+                        } else {
+                            System.out.println("Não encontramos esse veículo.");
+                        }
 
-                            System.out.print("Quantos dias Alugado: ");
-                            int diasAlugado = sc.nextInt();
-                            sc.nextLine();
+                        break;
 
-                            System.out.print("Quantidade de portas: ");
-                            int quantidadePortasSimulacao = sc.nextInt();
-                            sc.nextLine();
-
-                            // Aqui você está adicionando um novo carro, mas não está simulando o aluguel
-                            // Você pode criar um método para simular o aluguel em vez de adicionar um novo veículo
-                            veiculos.add(new Carro(modeloSimulacao, marcaSimulacao, anoFabricacaoSimulacao, precoBaseSimulacao, quantidadePortasSimulacao));
-                            break;
-                        case 2:
-                            System.out.print("Modelo:");
-                            String modeloMotoSimulacao = sc.nextLine();
-
-                            System.out.print("Marca: ");
-                            String marcaMotoSimulacao = sc.nextLine();
-
-                            System.out.print("Ano Fabricação: ");
-                            Integer anoFabricacaoMotoSimulacao = sc.nextInt();
-                            sc.nextLine();
-
-                            System.out.print("Preço base do aluguel: ");
-                            Double precoBaseMotoSimulacao = sc.nextDouble();
-                            sc.nextLine(); // Adicionei para evitar problemas com o nextLine
-
-                            System.out.print("Dias alugado: ");
-                            Integer diasAlugadoMoto = sc.nextInt();
-                            sc.nextLine();
-
-                            System.out.print("Cilindrada: ");
-                            Integer cilindradaSimulacao = sc.nextInt();
-                            sc.nextLine();
-
-                            // Aqui você está adicionando um novo moto, mas não está simulando o aluguel
-                            // Você pode criar um método para simular o aluguel em vez de adicionar um novo veículo
-                            veiculos.add(new Moto(modeloMotoSimulacao, marcaMotoSimulacao, anoFabricacaoMotoSimulacao, precoBaseMotoSimulacao, cilindradaSimulacao));
-                    }
-                    break;
-                case 4:
-                    continuar = false;
-                    System.out.println("Saindo...");
-                    break;
-                default:
-                    System.out.println("Opção não reconhecida!");
+                    case 4:
+                        continuar = false;
+                        System.out.println("Saindo...");
+                        break;
+                    default:
+                        System.out.println("Opção não reconhecida!");
+                }
+            }catch (InputMismatchException e){
+                System.out.println("Opção invalida!!");
+                sc.nextLine();
             }
         }
 

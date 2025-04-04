@@ -3,38 +3,27 @@ package entities;
 public class Carro extends Veiculo{
     private Integer quantidadePortas;
 
-    public Carro(){
-        super();
-    }
 
-    public Carro(String modelo, String marca, Integer anoFabricacao, Double precoBase, Integer diasAlugado, Integer quantidadePortas) {
-        super(modelo, marca, anoFabricacao, precoBase, diasAlugado);
+    public Carro(String modelo, String marca, Integer anoFabricacao, Double precoBase, Integer quantidadePortas) {
+        super(modelo, marca, anoFabricacao, precoBase);
         this.quantidadePortas = quantidadePortas;
-    }
-
-    public Carro(String modelo, String marca, int anoFabricacao, Double precoBase, int quantidadePortas) {
     }
 
     @Override
     public double calcularAluguel(Integer diasAlugado) {
-        if (quantidadePortas <= 2) {
-            return precoBase * diasAlugado;
-        }
-        else{
-            return ((precoBase * diasAlugado) * 0.10) * 10;
-        }
-
+        return quantidadePortas <= 4 ? precoBase * diasAlugado : precoBase * diasAlugado * 1.1;
     }
 
     @Override
     public String toString() {
-        return "Carro{" +
-                "quantidadePortas=" + quantidadePortas +
-                ", modelo='" + modelo + '\'' +
-                ", marca='" + marca + '\'' +
-                ", anoFabricacao=" + anoFabricacao +
-                ", precoBase=" + precoBase +
-                "Preço a pagar pelo aluguel de " + diasAlugado + " é: " + calcularAluguel(diasAlugado);
+        return "Carro: "  +
+                "\nModelo: " + modelo +
+                "\nMarca: " + marca +
+                "\nAnoFabricacao: " + anoFabricacao +
+                "\nPrecoBase: " + precoBase +
+                "\nQuantidadePortas: " + quantidadePortas +
+                "\n-------------------------------------";
+
     }
 
 
