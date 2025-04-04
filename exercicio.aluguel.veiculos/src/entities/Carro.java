@@ -12,6 +12,9 @@ public class Carro extends Veiculo{
         this.quantidadePortas = quantidadePortas;
     }
 
+    public Carro(String modelo, String marca, int anoFabricacao, Double precoBase, int quantidadePortas) {
+    }
+
     @Override
     public double calcularAluguel(Integer diasAlugado) {
         if (quantidadePortas <= 2) {
