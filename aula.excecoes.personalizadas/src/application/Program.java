@@ -1,6 +1,7 @@
 package application;
 
 import model.entities.Reservas;
+import model.exceptions.DomainException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,7 @@ public class Program {
 
         }catch (ParseException e){
             System.out.println("Formato da data invalido!");
-        }catch (IllegalArgumentException e){
+        }catch (DomainException e){
             System.out.println("Erro na reserva: " + e.getMessage());
         }
 
