@@ -6,8 +6,10 @@ import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
-        File file = new File("c:\\temp\\in.txt");
+        File file = new File("c:\\temp\\in");
 
+//        file.canRead();
+//        System.out.println(file);
 
         try (Scanner sc = new Scanner(file)) {
             while (sc.hasNextLine()) {
