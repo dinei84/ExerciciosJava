@@ -1,5 +1,7 @@
 package entities;
 
+import exceptions.DomainException;
+
 public class Conta {
     private Integer number;
     private String titular;
@@ -39,37 +41,27 @@ public class Conta {
         return limiteSaque;
     }
 
-    public Double getNovoSaldo() {
-        return novoSaldo;
+
+    public void sacar(Double saque) throws DomainException.SaldoInsuficienteException, DomainException.LimiteSaqueExcedidoException, DomainException.ValorInvalidoException {
+        if (saque <= 0) throw new DomainException.ValorInvalidoException("Valor de saque invalido");
+        if (saque > limiteSaque) {
+            throw new DomainException.LimiteSaqueExcedidoException("Seu limite de saque é: R$" + getLimiteSaque());
+        }
+        if (saque > saldo) {
+            throw new DomainException.SaldoInsuficienteException("Sem saldo");
+        }
+        saldo -= saque;
     }
 
 
-    public void sacar(Double saque){
-
-        if (saque > saldo){
-            System.out.println("Sem saldo");
-        }
-        if (saque > limiteSaque){
-            System.out.println("Seu limite de saque é: " + getLimiteSaque());
-        }
-
-    }
-
-    public Double saldoAtualizado (Double saque){
-        double saldoAtl = 0;
-        if (saque > limiteSaque || saque > saldo){
-            saldo -= saque;
-        }
-        return saldoAtl = saldo;
-    }
 
     @Override
     public String toString() {
-        return "Conta: " +
+        return "\nConta: " +
                 "\nNumber: " + number +
-                " - Titular='" + titular + '\'' +
-                " - Saldo=" + saldo +
-                " - LimiteSaque=" + limiteSaque +
-                " - Novo Saldo: " + saldoAtualizado(saldo);
+                "\nTitular: " + titular + '\'' +
+                "\nSaldo: " + saldo +
+                "\nLimiteSaque: " + limiteSaque;
     }
+
 }
