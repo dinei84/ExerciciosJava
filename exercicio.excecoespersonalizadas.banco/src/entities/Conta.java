@@ -42,15 +42,19 @@ public class Conta {
     }
 
 
-    public void sacar(Double saque) throws DomainException.SaldoInsuficienteException, DomainException.LimiteSaqueExcedidoException, DomainException.ValorInvalidoException {
-        if (saque <= 0) throw new DomainException.ValorInvalidoException("Valor de saque invalido");
+    public void sacar(Double saque) throws DomainException.SaldoInsuficiente, DomainException.LimiteSaqueExcedido, DomainException.ValorInvalido {
+        if (saque <= 0) throw new DomainException.ValorInvalido("Valor de saque invalido");
         if (saque > limiteSaque) {
-            throw new DomainException.LimiteSaqueExcedidoException("Seu limite de saque é: R$" + getLimiteSaque());
+            throw new DomainException.LimiteSaqueExcedido("Seu limite de saque é: R$" + getLimiteSaque());
         }
         if (saque > saldo) {
-            throw new DomainException.SaldoInsuficienteException("Sem saldo");
+            throw new DomainException.SaldoInsuficiente("Sem saldo");
         }
         saldo -= saque;
+    }
+
+    public void depositar(Double deposito){
+        saldo += deposito;
     }
 
 
