@@ -7,7 +7,6 @@ public class Conta {
     private String titular;
     private Double saldo;
     private Double limiteSaque;
-    private Double novoSaldo;
 
     public Conta(Integer number, String titular, Double saldo, Double limiteSaque) {
         this.number = number;

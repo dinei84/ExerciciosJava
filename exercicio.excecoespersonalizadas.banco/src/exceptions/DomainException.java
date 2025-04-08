@@ -2,9 +2,6 @@ package exceptions;
 
 public class DomainException extends Exception{
 
-    public DomainException (String msg){
-        super(msg);
-    }
 
     public static class SaldoInsuficienteException extends Exception {
         public SaldoInsuficienteException(String msg) {
