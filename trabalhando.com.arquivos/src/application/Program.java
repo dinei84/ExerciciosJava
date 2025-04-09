@@ -6,17 +6,22 @@ import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
-        File file = new File("c:\\temp\\in");
 
-//        file.canRead();
-//        System.out.println(file);
+        File file = new File("c:\\temp\\in.txt");
+        Scanner sc = null;
 
-        try (Scanner sc = new Scanner(file)) {
-            while (sc.hasNextLine()) {
+        try{
+            sc = new Scanner(file);
+            while (sc.hasNextLine()){
                 System.out.println(sc.nextLine());
             }
-        } catch (IOException e) {
-            System.err.println("Erro: " + e.getMessage());
+        }catch (IOException e){
+            System.out.println("Arquivo não encontrado " + e.getMessage() );
+        }finally {
+            if (sc != null){
+                sc.close();
+            }
         }
+
     }
 }
