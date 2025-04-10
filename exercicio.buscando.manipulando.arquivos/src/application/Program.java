@@ -8,21 +8,21 @@ public class Program {
     public static void main(String[] args) {
         String patch = "c:\\temp\\arquivo.csv";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(patch))){
+        List<String> linhasTratadas = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(patch))) {
             String line = br.readLine();
 
-            while (line != null){
-
+            while (line != null) {
                 String[] itens = line.split(",");
 
                 String nome = itens[0];
                 double preco = Double.parseDouble(itens[1]);
                 int quantidade = Integer.parseInt(itens[2]);
 
-                Double total = preco * quantidade;
-                System.out.println(nome + ", " + total);
+                double total = preco * quantidade;
 
-                List<String> dados = new ArrayList<>();
+                linhasTratadas.add(nome + ", " + String.format("%.2f", total));
 
                 line = br.readLine();
             }
@@ -30,17 +30,22 @@ public class Program {
             System.out.println("Erro: " + e.getMessage());
         }
 
-        String caminho = "C:\\temp\\";
-        boolean sucesso = new File(caminho + "\\somados").mkdir();
-        System.out.println("Pasta criada com sucesso!" + sucesso);
+        // Parte nova: gerar pasta "out" e salvar "summary.csv" dentro dela
+        File arquivoOriginal = new File(patch);
+        String pastaOrigem = arquivoOriginal.getParent();
+        File pastaOut = new File(pastaOrigem + "\\out");
 
-        String patchEscrito = "c:\\temp\\somados\\somados.csv";
+        boolean sucesso = pastaOut.mkdir();
+        System.out.println("Pasta criada com sucesso? " + sucesso);
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(patchEscrito))){
-            for (String line : line){
+        String patchEscrito = pastaOut.getPath() + "\\summary.csv";
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(patchEscrito))) {
+            for (String line : linhasTratadas) {
                 bw.write(line);
                 bw.newLine();
             }
+            System.out.println("Arquivo criado com sucesso em: " + patchEscrito);
         } catch (IOException e) {
             e.printStackTrace();
         }
