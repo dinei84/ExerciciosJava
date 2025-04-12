@@ -1,13 +1,15 @@
 package entities;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EstoqueService {
 
-
-    public static void lerProdutos() throws FileNotFoundException {
+    public static List<Produto> lerProdutos() throws FileNotFoundException {
         String patch = "c:\\temp\\produtos\\produtos.csv";
+        List<Produto> produto = new ArrayList<>();
+        List<Produto> produtosParaRepor = new ArrayList<>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(patch))){
             String line = br.readLine();
@@ -20,46 +22,46 @@ public class EstoqueService {
                 int quantidadeEstoque = Integer.parseInt(itens[2]);
                 int quantidadeMinima = Integer.parseInt(itens[3]);
 
-                Produto produto = new Produto(nome, preco, quantidadeEstoque, quantidadeMinima);
-
-                if(produto.quantidadeEstoque > produto.quantidadeMinima){
-                    produto.calcularReposicao(quantidadeEstoque, quantidadeMinima);
-                }
-
+                produto.add(new Produto(nome, preco, quantidadeEstoque, quantidadeMinima));
                 line = br.readLine();
             }
 
-            System.out.println(line);
+            for (Produto p : produto){
+                if (p.precisaRepor()){
+                    produtosParaRepor.add(p);
+                }
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        return produtosParaRepor;
     }
 
-    public static void listaFinal(List<String> produto){
-        String newPatch = "c:\\temp\\produtos\\produtos.csv";
+    public static void listaFinal(List<Produto> produtosParaRepor){
+        String newPatch = "c:\\temp\\produtos";
         File pastaOrigem = new File(newPatch);
 
         File pasteOut = new File(pastaOrigem + "\\out");
 
-        boolean sucesso = pasteOut.mkdir();
-        System.out.println("Pasta criada com sucesso!" + sucesso);
+        if (!pasteOut.exists()){
+            boolean sucesso = pasteOut.mkdir();
+            System.out.println("Pasta criada com sucesso? " + sucesso);
+        }
 
         String patchEscrito = pasteOut.getPath() + "\\restock.csv";
 
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(patchEscrito))){
-            for (String line : produto){
-                bw.write(line);
+            for (Produto p : produtosParaRepor){
+                bw.write(p.getNome() + ", " + p.calcularReposicao());
                 bw.newLine();
             }
 
-            System.out.println("Arquivo criado com sucesso" + patchEscrito);
+            System.out.println("Arquivo criado com sucesso: " + patchEscrito);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
-
-
 }
