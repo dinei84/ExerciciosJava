@@ -1,11 +1,15 @@
 package model.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Contrato {
     private Integer numero;
     private Date data;
     private Double valorTotal;
+
+    List<Parcela> parcelas = new ArrayList<>();
 
     public Contrato(Integer numero, Date data, Double valorTotal) {
         this.numero = numero;
