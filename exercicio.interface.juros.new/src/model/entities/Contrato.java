@@ -40,4 +40,11 @@ public class Contrato {
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    public List<Parcela> getParcelas(){
+        return parcelas;
+    }
+    public void adicionarParcelas(Parcela parcela){
+        parcelas.add(parcela);
+    }
 }
