@@ -19,7 +19,7 @@ public class ServicoContrato {
     public void processandoContrato(Contrato contrato, Integer meses){
         double valorBaseParcela = contrato.getValorTotal() / meses;
 
-        for (int i = 1; i < meses; i++) {
+        for (int i = 1; i < meses + 1; i++) {
             double valorComJuros = servico.juros(valorBaseParcela, i);
 
             double valorFinal = valorComJuros + servico.taxaDePagamento(valorComJuros);

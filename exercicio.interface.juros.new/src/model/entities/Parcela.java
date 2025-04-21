@@ -20,17 +20,10 @@ public class Parcela {
         return valor;
     }
 
-//    @Override
-//    public String toString(){
-//        return String.format("%d/%tY - R$ %.2f", dataVencimento, dataVencimento, dataVencimento, valor);
-//    }
-
 
     @Override
     public String toString() {
         return "Parcela: " +
-                "\nData do Vencimento: " + dataVencimento +
-                "\nData do Vencimento: " + dataVencimento +
                 "\nData do Vencimento: " + dataVencimento +
                 "\nValor: " + valor +
                 "\n---------------------------------------";

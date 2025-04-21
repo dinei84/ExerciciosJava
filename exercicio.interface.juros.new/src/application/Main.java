@@ -7,6 +7,7 @@ import model.services.ServicoPaypal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -15,15 +16,29 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        System.out.println("Dados do Contrato");
+        System.out.print("Numero do contrato: ");
+        Integer numero = sc.nextInt();
+
+        System.out.print("Data e hora (dd/MM/yyyy) ");
+        Date data = sdf.parse(sc.next());
+
+        System.out.print("Valor total: ");
+        Double valorTotal = sc.nextDouble();
+
+        System.out.print("Numero de parcelas: ");
+        int parcelas = sc.nextInt();
+        sc.hasNextLine();
+
+        Contrato contrato1 = new Contrato(numero, data, valorTotal);
 
 
-        Contrato obj = new Contrato(8022, sdf.parse("15/04/2025 10:30"), 600.0);
+        ServicoContrato servicoContrato = new ServicoContrato(contrato1, new ServicoPaypal());
+        servicoContrato.processandoContrato(contrato1, parcelas);
 
-        ServicoContrato servicoContrato = new ServicoContrato(obj, new ServicoPaypal());
-        servicoContrato.processandoContrato(obj, 3);
-
-        for (Parcela parcela : obj.getParcelas()){
+        for (Parcela parcela : contrato1.getParcelas()){
             System.out.println("Parcelas: " + parcela);
         }
 
