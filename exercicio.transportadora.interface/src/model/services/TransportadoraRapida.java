@@ -3,6 +3,7 @@ package model.services;
 public class TransportadoraRapida implements ServicoDeFrete{
     @Override
     public double calcularFrete(double peso, double distancia) {
-        return 0;
+         double valor = 10.0;
+        return valor + (2 * distancia) + (1.5 * peso);
     }
 }
