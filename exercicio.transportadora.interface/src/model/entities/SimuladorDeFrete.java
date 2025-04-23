@@ -12,7 +12,8 @@ public class SimuladorDeFrete {
     }
 
 
-    public void simularFrete(ServicoDeFrete servico, Encomenda encomenda){
-
+    public void simularFrete(){
+        double valorFrete = servico.calcularFrete(encomenda.getPeso(), encomenda.getDistancia());
+        System.out.println("O valor do frete para a encomenda de: " + encomenda.getNome() + " é: R$ " + valorFrete);
     }
 }
