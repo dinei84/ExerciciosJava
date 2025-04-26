@@ -2,7 +2,7 @@ package model.entities;
 
 import model.enums.Cor;
 
-public class Quadrado extends Forma{
+public class Quadrado extends FormaAbstrata{
     private Double altura;
     private Double largura;
 
