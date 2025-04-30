@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/exercicio.carroseconsumos.herancaecontrato.iml" filepath="$PROJECT_DIR$/exercicio.carroseconsumos.herancaecontrato.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/exercicio.carroseconsumos.herancaecontrato.iml" filepath="$PROJECT_DIR$/.idea/exercicio.carroseconsumos.herancaecontrato.iml" />
+>>>>>>> 8261593bfc2dddcbc61cea6a62f0d155dfa0b5fb
     </modules>
   </component>
 </project>
