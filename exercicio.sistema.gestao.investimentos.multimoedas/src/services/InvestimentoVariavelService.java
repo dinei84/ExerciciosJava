@@ -3,38 +3,24 @@ package services;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class InvestimentoFixoService implements ServicoDeInvestimento{
+public class InvestimentoVariavelService implements ServicoDeInvestimento{
 
-    private static final BigDecimal TAXA_ANUAL = new BigDecimal("0.1415");
     private final BigDecimal valor;
     private final Integer meses;
+    private final BigDecimal TAXA_ANUAL;
 
-    public InvestimentoFixoService(BigDecimal valor, Integer meses) {
-        if (valor == null || meses == null){
-            throw new IllegalArgumentException("O valor não pode ser nulo");
-        }
-        if (valor.compareTo(BigDecimal.ZERO) <= 0){
-            throw new IllegalArgumentException("O valor precisa ser maior que 0");
-        }
-        if (meses <= 0 ){
-            throw new IllegalArgumentException("O periodo precisa ser maior que 0");
-        }
-
+    public InvestimentoVariavelService(BigDecimal valor, Integer meses, BigDecimal taxaAnual) {
         this.valor = valor;
         this.meses = meses;
-
+        TAXA_ANUAL = taxaAnual;
     }
 
     public BigDecimal getValor() {
         return valor;
     }
 
-    public  Integer getMeses(){
+    public Integer getMeses() {
         return meses;
-    }
-
-    public BigDecimal calcularInvestimentoFixo(){
-        return calcularInvestimento(getValor(),getMeses());
     }
 
     @Override
@@ -43,7 +29,7 @@ public class InvestimentoFixoService implements ServicoDeInvestimento{
     }
 
     @Override
-    public BigDecimal calcularInvestimento(BigDecimal valor, Integer meses){
+    public BigDecimal calcularInvestimento(BigDecimal valor, Integer meses) {
         if (valor == null || meses == null){
             throw new IllegalArgumentException("Os valores não podem ser nulos");
         }
@@ -52,7 +38,7 @@ public class InvestimentoFixoService implements ServicoDeInvestimento{
         }
 
         BigDecimal taxaMensal = getTaxaAnual()
-                .divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_EVEN);
+                .divide(BigDecimal.valueOf(getMeses()), 10, RoundingMode.HALF_EVEN);
 
         BigDecimal fatorJuros = BigDecimal.ONE.add(taxaMensal)
                 .pow(meses);
@@ -60,5 +46,4 @@ public class InvestimentoFixoService implements ServicoDeInvestimento{
         return valor.multiply(fatorJuros)
                 .setScale(2, RoundingMode.HALF_EVEN);
     }
-
 }
