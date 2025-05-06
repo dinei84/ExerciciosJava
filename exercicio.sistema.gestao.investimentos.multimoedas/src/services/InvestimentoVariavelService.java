@@ -38,12 +38,20 @@ public class InvestimentoVariavelService implements ServicoDeInvestimento{
         }
 
         BigDecimal taxaMensal = getTaxaAnual()
-                .divide(BigDecimal.valueOf(getMeses()), 10, RoundingMode.HALF_EVEN);
+                .divide(BigDecimal.valueOf(getMeses()), 2, RoundingMode.HALF_EVEN);
 
         BigDecimal fatorJuros = BigDecimal.ONE.add(taxaMensal)
                 .pow(meses);
 
         return valor.multiply(fatorJuros)
                 .setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    @Override
+    public String toString() {
+        return "Investimento Juros Variavel" +
+                "\nValor: R$" + valor + ",00" +
+                "\nPeríodo: " + meses + ", meses" +
+                "\nTaxa Anual: " + TAXA_ANUAL + "%.";
     }
 }

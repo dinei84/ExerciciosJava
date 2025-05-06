@@ -42,23 +42,31 @@ public class InvestimentoFixoService implements ServicoDeInvestimento{
         return TAXA_ANUAL;
     }
 
+
     @Override
-    public BigDecimal calcularInvestimento(BigDecimal valor, Integer meses){
-        if (valor == null || meses == null){
-            throw new IllegalArgumentException("Os valores não podem ser nulos");
+    public BigDecimal calcularInvestimento(BigDecimal valor, Integer meses) {
+        try {
+            BigDecimal fatorJuros = null;
+            if (meses <= 120 || meses > 0) {
+                BigDecimal taxaMensal = getTaxaAnual()
+                        .divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_EVEN);
+
+                fatorJuros = BigDecimal.ONE.add(taxaMensal)
+                        .pow(meses);
+            }
+            return valor.multiply(fatorJuros)
+                    .setScale(2, RoundingMode.HALF_EVEN);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        if (valor.compareTo(BigDecimal.ZERO) <= 0 || meses <= 0){
-            throw new IllegalArgumentException("Os valores precisam ser maiores que 0");
-        }
-
-        BigDecimal taxaMensal = getTaxaAnual()
-                .divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_EVEN);
-
-        BigDecimal fatorJuros = BigDecimal.ONE.add(taxaMensal)
-                .pow(meses);
-
-        return valor.multiply(fatorJuros)
-                .setScale(2, RoundingMode.HALF_EVEN);
     }
 
+    @Override
+    public String  toString() {
+        BigDecimal taxaConvertida = TAXA_ANUAL.multiply(new BigDecimal("100"));
+        return "Investimento de Juros Fixos: " +
+                "\nCom Juros fixos de: " + taxaConvertida.setScale(2,RoundingMode.HALF_EVEN) + "%, anuais" +
+                "\nValor inicial: " + valor +
+                "\nPeríodo: " + meses + ", meses";
+    }
 }
