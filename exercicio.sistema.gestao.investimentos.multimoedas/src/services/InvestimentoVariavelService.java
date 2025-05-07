@@ -23,6 +23,14 @@ public class InvestimentoVariavelService implements ServicoDeInvestimento{
         return meses;
     }
 
+    public BigDecimal converterDecimal(BigDecimal taxaPercentual){
+        if (taxaPercentual == null) {
+            throw new IllegalArgumentException("Taxa percentual não pode ser nula");
+        }
+        return taxaPercentual.divide(BigDecimal.ONE.valueOf(100), 10, RoundingMode.HALF_EVEN);
+    }
+
+
     @Override
     public BigDecimal getTaxaAnual() {
         return TAXA_ANUAL;
@@ -38,7 +46,7 @@ public class InvestimentoVariavelService implements ServicoDeInvestimento{
         }
 
         BigDecimal taxaMensal = getTaxaAnual()
-                .divide(BigDecimal.valueOf(getMeses()), 2, RoundingMode.HALF_EVEN);
+                .divide(BigDecimal.valueOf(getMeses()), 10, RoundingMode.HALF_EVEN);
 
         BigDecimal fatorJuros = BigDecimal.ONE.add(taxaMensal)
                 .pow(meses);

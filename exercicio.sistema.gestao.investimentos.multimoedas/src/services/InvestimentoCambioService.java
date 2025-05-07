@@ -1,12 +1,6 @@
 package services;
 
-import java.math.BigDecimal;
-
 import currency.ConversorDeMoeda;
-import currency.ConversorEUR;
-import currency.ConversorUSD;
-import services.ServicoDeInvestimento;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -70,10 +64,9 @@ public class InvestimentoCambioService implements ServicoDeInvestimento {
 
     @Override
     public String toString() {
-        return "InvestimentoCambioService{" +
-                "valor=" + valor +
-                ", meses=" + meses +
-                ", conversor=" + conversor +
-                '}';
+        return "Investimento Cambio" +
+                "\nValor: " + valor +
+                "\nPeríodo: " + meses +
+                "\nTaxa de Cambio: " + getTaxaAnual();
     }
 }

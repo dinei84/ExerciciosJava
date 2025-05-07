@@ -1,17 +1,14 @@
 package application;
 
 import currency.ConversorDeMoeda;
-import currency.ConversorEUR;
 import currency.ConversorUSD;
+import java.math.BigDecimal;
+import java.util.Locale;
+import java.util.Scanner;
 import services.InvestimentoCambioService;
 import services.InvestimentoFixoService;
 import services.InvestimentoVariavelService;
 import services.ServicoDeInvestimento;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Locale;
-import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -40,9 +37,11 @@ public class App {
         }
         if (escolha == 2){
             System.out.print("Digite o valor da taxa anual: ");
-            BigDecimal taxaAnual = sc.nextBigDecimal();
-            ServicoDeInvestimento variavel = new InvestimentoVariavelService(valor, meses, taxaAnual);
+            BigDecimal taxaAnualEntrada = sc.nextBigDecimal();
+            
+            ServicoDeInvestimento variavel = new InvestimentoVariavelService(valor, meses, taxaAnualEntrada);
             BigDecimal valorFinal = variavel.calcularInvestimento(valor, meses);
+
             System.out.println(variavel);
             System.out.println("Valor final: R$" + valorFinal);
         }
@@ -53,8 +52,12 @@ public class App {
 
             if (escolhaMoeda == 1){
                 ConversorDeMoeda dollar = new ConversorUSD(valor);
+
                 ServicoDeInvestimento internacional = new InvestimentoCambioService(valor, meses, dollar);
                 internacional.calcularInvestimento(valor, meses);
+                
+                System.out.println(internacional);
+
             }
 
         }

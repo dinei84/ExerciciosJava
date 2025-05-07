@@ -29,8 +29,7 @@ public class ConversorUSD implements ConversorDeMoeda{
 
     @Override
     public String toString() {
-        return "ConversorUSD{" +
-                "Cambio: " + calcular() +
-                '}';
+        return "Conversor USD" +
+                "\nValor Total; : " + calcular();
     }
 }
