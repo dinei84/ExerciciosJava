@@ -3,6 +3,7 @@ package services;
 import currency.ConversorDeMoeda;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class InvestimentoCambioService implements ServicoDeInvestimento {
 
@@ -32,11 +33,16 @@ public class InvestimentoCambioService implements ServicoDeInvestimento {
 
     public BigDecimal calcularInvestimentoCambio(){
         BigDecimal montanteFinal = calcularInvestimento(getValor(), getMeses());
-        BigDecimal montanteConvertido = conversor.calcularCambio(montanteFinal, BigDecimal.valueOf(meses));
+        BigDecimal montanteConvertido = conversor.calcularCambio(montanteFinal, conversor.getCotacao());
         return montanteConvertido;
     }
 
-
+    public String converterTaxa(){
+        BigDecimal resultado  = TAXA_ANUAL.multiply(new BigDecimal("100").setScale(2, RoundingMode.HALF_UP
+        ));
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return df.format(resultado);
+    }
 
     @Override
     public BigDecimal getTaxaAnual() {
@@ -65,8 +71,8 @@ public class InvestimentoCambioService implements ServicoDeInvestimento {
     @Override
     public String toString() {
         return "Investimento Cambio" +
-                "\nValor: " + valor +
-                "\nPeríodo: " + meses +
-                "\nTaxa de Cambio: " + getTaxaAnual();
+                "\nValor investido: R$" + valor + ",00" +
+                "\nPeríodo: " + meses + " meses" +
+                "\nTaxa de Cambio: " + converterTaxa() + "%";
     }
 }

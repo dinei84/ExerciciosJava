@@ -1,6 +1,7 @@
 package application;
 
 import currency.ConversorDeMoeda;
+import currency.ConversorEUR;
 import currency.ConversorUSD;
 import java.math.BigDecimal;
 import java.util.Locale;
@@ -46,7 +47,7 @@ public class App {
             System.out.println("Valor final: R$" + valorFinal);
         }
         if (escolha == 3){
-            System.out.println("Escolha 1- Dollar / 2- Euro");
+            System.out.print("Escolha 1 - Dollar / 2 - Euro: ");
             int escolhaMoeda = sc.nextInt();
             sc.nextLine();
 
@@ -54,10 +55,19 @@ public class App {
                 ConversorDeMoeda dollar = new ConversorUSD(valor);
 
                 ServicoDeInvestimento internacional = new InvestimentoCambioService(valor, meses, dollar);
-                internacional.calcularInvestimento(valor, meses);
+                BigDecimal valorFinal = internacional.calcularInvestimento(valor, meses);
                 
                 System.out.println(internacional);
+                System.out.println("Valor total da aplicação: R$" + valorFinal);
+            }
+            if (escolhaMoeda == 2){
+                ConversorDeMoeda EUR = new ConversorEUR(valor);
 
+                ServicoDeInvestimento euro = new InvestimentoCambioService(valor, meses, EUR);
+                BigDecimal valorFinal = euro.calcularInvestimento(valor, meses);
+
+                System.out.println(euro);
+                System.out.println("Valor total do investimento: R$" + valorFinal);
             }
 
         }

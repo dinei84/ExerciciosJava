@@ -64,9 +64,9 @@ public class InvestimentoFixoService implements ServicoDeInvestimento{
     @Override
     public String  toString() {
         BigDecimal taxaConvertida = TAXA_ANUAL.multiply(new BigDecimal("100"));
-        return "Investimento de Juros Fixos: " +
+        return "\nInvestimento de Juros Fixos: " +
                 "\nCom Juros fixos de: " + taxaConvertida.setScale(2,RoundingMode.HALF_EVEN) + "%, anuais" +
-                "\nValor inicial: " + valor +
+                "\nValor inicial: R$" + valor + ",00" +
                 "\nPeríodo: " + meses + ", meses";
     }
 }
