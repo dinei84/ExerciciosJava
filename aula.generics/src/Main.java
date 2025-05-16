@@ -24,7 +24,7 @@ public class Main {
         for (int value : list){
             System.out.println(value);
         }
-
+        System.out.println("First element: " + list.get(0));
 
 
 
