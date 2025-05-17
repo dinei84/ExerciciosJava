@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
+package application;
+
+import services.PrintService;
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -7,26 +9,23 @@ public class Main {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        List<Integer> list = new ArrayList<>();
+        PrintService<String> ps = new PrintService<>();
 
         System.out.print("How many values?: ");
         int quantity = sc.nextInt();
 
+
         for (int i = 0; i < quantity; i++) {
-            System.out.print("Number " + (i + 1) + "° ");
-            int number = sc.nextInt();
-            sc.nextLine();
+            System.out.print((i + 1) + "° " +"Value ");
+            String value = sc.next();
 
-            list.add(number);
+            ps.addValue(value);
         }
 
 
-        for (int value : list){
-            System.out.println(value);
-        }
-        System.out.println("First element: " + list.get(0));
-
-
+        ps.print();
+        String x = ps.first();
+        System.out.println("First: " + x);
 
 
         sc.close();
