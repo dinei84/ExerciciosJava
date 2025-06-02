@@ -61,4 +61,15 @@ public class Books {
     public void  increaseAmount(){
 
     }
+
+    @Override
+    public String toString() {
+        return "Books{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", ISBN=" + ISBN +
+                ", year=" + year +
+                ", amount=" + amount +
+                '}';
+    }
 }

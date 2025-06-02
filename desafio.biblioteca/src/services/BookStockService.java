@@ -32,7 +32,7 @@ public class BookStockService {
             }
 
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Arquivo não encontrado" + e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -40,33 +40,89 @@ public class BookStockService {
         return books;
     }
 
-    public static List<Books> addBooks(){
+
+    //Metodo para adicionar livros a partir de um arquivo CSV
+    public static void addBook(Books book){
         String patch = "C:\\temp\\books.csv";
-        List<Books> addBooks = new ArrayList<>();
 
-        try (BufferedWriter br = new BufferedWriter(new FileWriter(patch))){
-            String[] line = br.readLine();
-
-            while (line != null){
-                String[] itens = line.split(",");
-
-                String title = itens[0];
-                String author = itens[1];
-                int ISBN = Integer.parseInt(itens[2]);
-                int year = Integer.parseInt(itens[3]);
-                int id = Integer.parseInt(itens[4]);
-
-                addBooks.add(new Books(title,author,ISBN, year, id));
-                line = br.readLine();
-            }
-
-
+        try(BufferedWriter br =  new BufferedWriter(new FileWriter(patch, true))){
+            String line = String .join(",",
+                    book.getTitle(),
+                    book.getAuthor(),
+                    String.valueOf(book.getISBN()),
+                    String.valueOf(book.getYear()),
+                    String.valueOf(book.getAmount()));
+            br.write(line);
+            br.newLine();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error to save the book" + e);
         }
-
-        return addBooks;
     }
 
+    // Metodo para atualizar a quantidade de livros
+    public static void updateBookAmount(int ISBN, int newAmount) {
+        boolean found = false;
+        List<Books> books = readBooks();
+
+        for (Books book : books) {
+            if (book.getISBN() == ISBN) {
+                book.setAmount(newAmount);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            throw new RuntimeException("Book with ISBN " + ISBN + " not found.");
+        }
+        saveBooks(books);
+        System.out.println("Book amount updated successfully.");
+    }
+
+    // Metodo para salvar a lista de livros no arquivo CSV
+    public static void saveBooks(List<Books> books) {
+        String patch = "C:\\temp\\books.csv";
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(patch))) {
+            for (Books book : books) {
+                String line = String.join(",",
+                        book.getTitle(),
+                        book.getAuthor(),
+                        String.valueOf(book.getISBN()),
+                        String.valueOf(book.getYear()),
+                        String.valueOf(book.getAmount()));
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao salvar os livros no arquivo.", e);
+        }
+    }
+
+    //Metodo para reduzir a quantidade de livros
+    public static List<Books> reduceBookAmount(int ISBN, int amountToReduce) {
+        List<Books> books = readBooks();
+        boolean found = false;
+
+        for (Books book : books) {
+            if (book.getISBN() == ISBN) {
+                int newAmount = book.getAmount() - amountToReduce;
+                if (newAmount < 0) {
+                    throw new RuntimeException("Cannot reduce amount below zero.");
+                }
+                book.setAmount(newAmount);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            throw new RuntimeException("Book with ISBN " + ISBN + " not found.");
+        }
+
+        saveBooks(books);
+        System.out.println("Book amount reduced successfully.");
+
+        return books;
+    }
 
 }
