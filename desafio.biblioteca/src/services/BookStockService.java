@@ -2,7 +2,6 @@ package services;
 
 import entities.Books;
 
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +9,15 @@ import java.util.List;
 public class BookStockService {
 
     public static List<Books> readBooks(){
-        String patch = "C:\\temp\\books.csv";
+        String patch = "C:\\temp\\books.txt";
         List<Books> books = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(patch))){
-            String line = br.readLine();
-
-            while (line != null){
+        try (BufferedReader br = new BufferedReader(new FileReader(patch))){            ;
+            String line;
+            while ((line = br.readLine()) != null){
                 String[] itens = line.split(",");
 
-                if (itens.length < 5) {
+                if (itens.length == 5) {
                     String title = itens[0];
                     String author = itens[1];
                     int ISBN = Integer.parseInt(itens[2]);
@@ -27,7 +25,6 @@ public class BookStockService {
                     int id = Integer.parseInt(itens[4]);
 
                     books.add(new Books(title,author,ISBN, year, id));
-                    line = br.readLine();
                 }
             }
 
@@ -43,7 +40,7 @@ public class BookStockService {
 
     //Metodo para adicionar livros a partir de um arquivo CSV
     public static void addBook(Books book){
-        String patch = "C:\\temp\\books.csv";
+        String patch = "C:\\temp\\books.txt";
 
         try(BufferedWriter br =  new BufferedWriter(new FileWriter(patch, true))){
             String line = String .join(",",
@@ -123,6 +120,27 @@ public class BookStockService {
         System.out.println("Book amount reduced successfully.");
 
         return books;
+    }
+
+    //Metodo para excluir um livro
+    public static void deleteBook(int ISBN) {
+        List<Books> books = readBooks();
+        boolean found = false;
+
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getISBN() == ISBN) {
+                books.remove(i);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            throw new RuntimeException("Book with ISBN " + ISBN + " not found.");
+        }
+
+        saveBooks(books);
+        System.out.println("Book deleted successfully.");
     }
 
 }
