@@ -26,16 +26,16 @@ public class LoanService {
         }
 
         if (bookToRent == null) {
-            throw new RuntimeException("Livro não encontrado.");
+            throw new RuntimeException("Book not found.");
         }
 
         if (bookToRent.getAmount() <= 0) {
-            throw new RuntimeException("Livro sem estoque.");
+            throw new RuntimeException("No book in stock.");
         }
 
         Member member = MemberService.findMemberById(memberId);
         if (member == null) {
-            throw new RuntimeException("Membro não encontrado.");
+            throw new RuntimeException("Member not found.");
         }
 
 
@@ -51,22 +51,22 @@ public class LoanService {
         }
 
         BookStockService.reduceBookAmount(ISBN, 1);
-        System.out.println("Livro alugado com sucesso.");
+        System.out.println("Book rented successfully.");
     }
 
     // Listar empréstimos
     public static void listLoans() {
         try (BufferedReader br = new BufferedReader(new FileReader(PATH))) {
             String line;
-            System.out.println("Empréstimos registrados:");
+            System.out.println("Loan registerd:");
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                System.out.println("Livro ISBN: " + parts[0] + ", Membro ID: " + parts[1] + ", Data: " + parts[2]);
+                System.out.println("Book ISBN: " + parts[0] + ", Member ID: " + parts[1] + ", Date: " + parts[2]);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Nenhum empréstimo registrado.");
+            System.out.println("No loan registered.");
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao listar empréstimos: " + e);
+            throw new RuntimeException("Error listing loan: " + e);
         }
     }
 
@@ -86,11 +86,11 @@ public class LoanService {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao processar devolução: " + e);
+            throw new RuntimeException("Error processing return: " + e);
         }
 
         if (!found) {
-            System.out.println("Empréstimo não encontrado.");
+            System.out.println("Loan not found.");
             return;
         }
 
@@ -100,7 +100,7 @@ public class LoanService {
                 bw.newLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao atualizar empréstimos: " + e);
+            throw new RuntimeException("Error updating loans: " + e);
         }
 
         BookStockService.updateBookAmount(ISBN, BookStockService.readBooks().stream()
@@ -109,6 +109,6 @@ public class LoanService {
                 .map(b -> b.getAmount() + 1)
                 .orElse(1));
 
-        System.out.println("Livro devolvido com sucesso.");
+        System.out.println("Book returned successfully.");
     }
 }
