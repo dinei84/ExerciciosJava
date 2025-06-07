@@ -38,6 +38,7 @@ public class LoanService {
             throw new RuntimeException("Membro não encontrado.");
         }
 
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH, true))) {
             String line = String.join(",",
                     String.valueOf(ISBN),

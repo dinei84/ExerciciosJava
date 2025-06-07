@@ -20,8 +20,10 @@ public class Main {
         System.out.println("3. Add a book");
         System.out.println("4. View all members");
         System.out.println("5. Add a member");
-        System.out.println("6. Rent a book");
-        System.out.println("7. Return a book");
+        System.out.println("6. Delete a member");
+        System.out.println("7. List a book loan");
+        System.out.println("8. Return a book");
+        System.out.println("9. Delete a book");
         System.out.println("0. Exit");
         int option = sc.nextInt();
         sc.nextLine();
@@ -58,12 +60,47 @@ public class Main {
                     break;
 
                 case 2:
-                    // Implementar lógica para alugar um livro
+                    // Lógica para alugar um livro
+                    try {
+                        System.out.println("Alugando um livro...");
+                        System.out.print("Digite o ISBN do Livro que deseja alugar:");
+                        int isbn = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Digite o ID do Membro que deseja alugar o Livro: ");
+                        int memberID = sc.nextInt();
+                        sc.nextLine();
+
+                        LoanService.rentBook(isbn, memberID);
+                    }catch (IllegalArgumentException e){
+                        System.out.println("Erro: " + e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("Ocorreu um erro ao alugar o livro: " + e.getMessage());
+                    }
 
                     break;
 
                 case 3:
                     //implementar lógica para adicionar um livro
+                    try {
+                        System.out.println("Adicionando um livro...");
+                        System.out.print("Digite o título do livro: ");
+                        String title = sc.nextLine();
+                        System.out.print("Digite o autor do livro: ");
+                        String author = sc.nextLine();
+                        System.out.print("Digite o ISBN do livro: ");
+                        int isbn = sc.nextInt();
+                        System.out.print("Digite o ano de publicação do livro: ");
+                        int year = sc.nextInt();
+                        System.out.print("Digite a quantidade de livros: ");
+                        int amount = sc.nextInt();
+                        sc.nextLine();
+
+                        BookStockService.addBook(new Books(title, author, isbn, year, amount));
+                    }catch (IllegalArgumentException e){
+                        System.out.println("Erro: " + e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("Ocorreu um erro ao adicionar o livro: " + e.getMessage());
+                    }
                     break;
                 case 4:
                     List<Member> members = MemberService.readMembers();
@@ -84,19 +121,30 @@ public class Main {
                     break;
 
                 case 6:
-                    System.out.print("Digite o ISBN do livro: ");
-                    int isbnRent = sc.nextInt();
-                    System.out.print("Digite o ID do membro: ");
+                    System.out.println("Digite o ID do membro que deseja excluir: ");
                     int memberId = sc.nextInt();
-                    LoanService.rentBook(isbnRent, memberId);
+                    sc.nextLine();
+                    MemberService.deleteMemberById(memberId);
                     break;
 
                 case 7:
+                    // Listar emprestimos
+                    LoanService.listLoans();
+                    break;
+
+                case 8:
                     System.out.print("Digite o ISBN do livro: ");
                     int isbnReturn = sc.nextInt();
                     System.out.print("Digite o ID do membro: ");
                     int memberIdReturn = sc.nextInt();
                     LoanService.returnBook(isbnReturn, memberIdReturn);
+                    break;
+                case 9:
+
+                    System.out.print("Digite o ISBN do livro que deseja excluir: ");
+                    int isbnToDelete = sc.nextInt();
+                    sc.nextLine();
+                    BookStockService.deleteBook(isbnToDelete);
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");

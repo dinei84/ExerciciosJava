@@ -8,6 +8,7 @@ public class Books {
     private Integer amount;
 
     public Books(String title, String author, Integer ISBN, Integer year, Integer amount) {
+
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;

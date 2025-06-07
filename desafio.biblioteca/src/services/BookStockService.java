@@ -77,7 +77,7 @@ public class BookStockService {
 
     // Metodo para salvar a lista de livros no arquivo CSV
     public static void saveBooks(List<Books> books) {
-        String patch = "C:\\temp\\books.csv";
+        String patch = "C:\\temp\\books.txt";
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(patch))) {
             for (Books book : books) {
