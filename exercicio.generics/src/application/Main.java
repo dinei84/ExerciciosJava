@@ -24,13 +24,11 @@ public class Main {
         sc.nextLine();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        int quantidadeEscolhas = 0;
 
-        System.out.print("Qual o tipo de produto: 1.Eletronico / 2.Livro / 3.Alimento");
-        int escolha = sc.nextInt();
-        sc.nextLine();
-
-        while (quantidadeEscolhas <= escolha) {
+        for (int i = 0; i < quantidade; i ++ ) {
+            System.out.print("Qual o tipo de produto: 1.Eletronico / 2.Livro / 3.Alimento");
+            int escolha = sc.nextInt();
+            sc.nextLine();
 
             if (escolha == 1) {
                 System.out.print("Qual o nome do Produto: ");
@@ -70,8 +68,8 @@ public class Main {
                 }
                 produtos.addProduto((T) new Alimento(nomeAlimento, preconomeAlimento, validade));
             }
-
         }
+
         sc.close();
     }
 }
