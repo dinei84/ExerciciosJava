@@ -39,6 +39,8 @@ public class Main {
                 System.out.print("Qual a marca do Produto: ");
                 String marca = sc.nextLine();
                 produtos.addProduto((T) new Eletronico(nome, preco, marca));
+                produtos.obterMaisCaro();
+                System.out.println("Produto mais caro: " + produtos);
             }
 
             if (escolha == 2) {
