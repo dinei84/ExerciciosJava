@@ -15,11 +15,36 @@ public class Catalogo <T extends Produto>{
         if (produtos.isEmpty()) {
             throw new IllegalArgumentException("Lista vazia");
         }
-        BigDecimal maisCaroVarificado = null;
-        for (Produto produto : produtos) {
-            maisCaroVarificado = BigDecimal.valueOf(produto.getPreco().compareTo((BigDecimal) produtos));
+        T produtoMaisCaro = produtos.get(0);
+        BigDecimal precoMaisCaro = produtoMaisCaro.getPreco();
+        
+        for (T produto : produtos) {
+            if (produto.getPreco().compareTo(precoMaisCaro) > 0) {
+                produtoMaisCaro = produto;
+                precoMaisCaro = produto.getPreco();
+            }
         }
-        return (T) maisCaroVarificado;
+        return produtoMaisCaro;
+    }
+
+    public T obterMaisBarato() {
+        if (produtos.isEmpty()) {
+            throw new IllegalArgumentException("Lista vazia");
+        }
+        T produtoMaisBarato = produtos.get(0);
+        BigDecimal precoMaisBarato = produtoMaisBarato.getPreco();
+        
+        for (T produto : produtos) {
+            if (produto.getPreco().compareTo(precoMaisBarato) < 0) {
+                produtoMaisBarato = produto;
+                precoMaisBarato = produto.getPreco();
+            }
+        }
+        return produtoMaisBarato;
+    }
+
+    public List<T> listarProdutos() {
+        return new ArrayList<>(produtos);
     }
 
     @Override
