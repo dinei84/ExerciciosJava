@@ -5,9 +5,7 @@ import entities.Eletronico;
 import entities.Livro;
 import services.Catalogo;
 import services.Produto;
-import services.ProdutoClass;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
