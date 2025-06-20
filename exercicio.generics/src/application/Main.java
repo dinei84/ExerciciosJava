@@ -35,26 +35,25 @@ public class Main {
                 System.out.print("Qual o nome do Produto: ");
                 String nome = sc.nextLine();
                 System.out.print("Qual o preço do Produto: ");
-                BigDecimal preco = sc.nextBigDecimal();
+                Float preco = sc.nextFloat();
                 sc.nextLine();
                 System.out.print("Qual a marca do Produto: ");
                 String marca = sc.nextLine();
                 produtos.addProduto((T) new Eletronico(nome, preco, marca));
-<<<<<<< HEAD
+
 //                System.out.println("\nProduto adicionado com sucesso!");
 //                System.out.println("Nome: " + nome + ", Preço: " + preco + ", Marca: " + marca);
 //                System.out.println("------------------------");
-=======
+
                 produtos.obterMaisCaro();
-                System.out.println("Produto mais caro: " + produtos);
->>>>>>> 89d45fbfdd8a5ec33eeda8811c6cac8991d29e6c
+
             }
 
             if (escolha == 2) {
                 System.out.print("Qual o nome do Produto: ");
                 String nomeLivro = sc.nextLine();
                 System.out.print("Qual o preço do Produto: ");
-                BigDecimal precoLivro = sc.nextBigDecimal();
+                Float precoLivro = sc.nextFloat();
                 sc.nextLine();
                 System.out.print("Qual o Autor do Livro: ");
                 String autor = sc.nextLine();
@@ -68,7 +67,7 @@ public class Main {
                 System.out.print("Qual o nome do Produto: ");
                 String nomeAlimento = sc.nextLine();
                 System.out.print("Qual o preço do Produto: ");
-                BigDecimal preconomeAlimento = sc.nextBigDecimal();
+                Float preconomeAlimento = sc.nextFloat();
                 sc.nextLine();
                 System.out.print("Qual a Data de Validade: ");
                 String dataStr = sc.nextLine();
@@ -79,9 +78,7 @@ public class Main {
                     System.out.println("Formato invalido");
                 }
                 produtos.addProduto((T) new Alimento(nomeAlimento, preconomeAlimento, validade));
-//                System.out.println("\nProduto adicionado com sucesso!");
-//                System.out.println("Nome: " + nomeAlimento + ", Preço: " + preconomeAlimento + ", Data de Validade: " + sdf.format(validade));
-//                System.out.println("------------------------");
+
             }
         }
 

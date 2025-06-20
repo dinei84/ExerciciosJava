@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class Eletronico extends ProdutoClass implements Produto {
     private String marca;
 
-    public Eletronico(String nome, BigDecimal preco, String marca) {
+    public Eletronico(String nome, Float preco, String marca) {
         super(nome, preco);
         this.marca = marca;
     }
@@ -18,12 +18,14 @@ public class Eletronico extends ProdutoClass implements Produto {
     }
 
     @Override
-    public BigDecimal getPreco() {
-        return null;
+    public Float getPreco() {
+        return preco;
     }
 
     @Override
     public String getNome() {
-        return "";
+        return nome;
     }
+
+
 }

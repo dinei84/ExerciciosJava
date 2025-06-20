@@ -15,14 +15,22 @@ public class Catalogo <T extends Produto>{
         if (produtos.isEmpty()) {
             throw new IllegalArgumentException("Lista vazia");
         }
-        T produtoMaisCaro = produtos.get(0);
-        BigDecimal precoMaisCaro = produtoMaisCaro.getPreco();
+        T produtoMaisCaro = null;
+        Float precoMaisCaro = null;
         
         for (T produto : produtos) {
-            if (produto.getPreco().compareTo(precoMaisCaro) > 0) {
-                produtoMaisCaro = produto;
-                precoMaisCaro = produto.getPreco();
+            Float precoAtual = produto.getPreco();
+            if (precoAtual != null) {
+                if (precoMaisCaro == null || precoAtual > precoMaisCaro) {
+                    produtoMaisCaro = produto;
+                    precoMaisCaro = precoAtual;
+                }
             }
+
+        }
+
+        if (produtoMaisCaro == null){
+            throw new IllegalArgumentException("Nenhum produto possui preço valido");
         }
         return produtoMaisCaro;
     }
@@ -31,15 +39,22 @@ public class Catalogo <T extends Produto>{
         if (produtos.isEmpty()) {
             throw new IllegalArgumentException("Lista vazia");
         }
-        T produtoMaisBarato = produtos.get(0);
-        BigDecimal precoMaisBarato = produtoMaisBarato.getPreco();
+        T produtoMaisBarato = null;
+        Float precoMaisBarato = null;
         
         for (T produto : produtos) {
-            if (produto.getPreco().compareTo(precoMaisBarato) < 0) {
-                produtoMaisBarato = produto;
-                precoMaisBarato = produto.getPreco();
+            Float precoAtual = produto.getPreco();
+            if (precoAtual != null) {
+                if (precoMaisBarato == null || precoAtual < precoMaisBarato) {
+                    produtoMaisBarato = produto;
+                    precoMaisBarato = precoAtual;
+                }
             }
         }
+        if (produtoMaisBarato == null){
+            throw new IllegalArgumentException("Nenhum produto possui preco valido");
+        }
+
         return produtoMaisBarato;
     }
 

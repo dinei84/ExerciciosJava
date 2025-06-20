@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public interface Produto {
 
-    BigDecimal getPreco();
+    Float getPreco();
     String getNome();
 
 }

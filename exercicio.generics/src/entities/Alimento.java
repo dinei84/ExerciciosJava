@@ -9,7 +9,7 @@ import java.util.Date;
 public class Alimento extends ProdutoClass implements Produto {
     private Date validade;
 
-    public Alimento(String nome, BigDecimal preco, Date validade) {
+    public Alimento(String nome, float preco, Date validade) {
         super(nome, preco);
         this.validade = validade;
     }
@@ -19,12 +19,12 @@ public class Alimento extends ProdutoClass implements Produto {
     }
 
     @Override
-    public BigDecimal getPreco() {
-        return null;
+    public Float getPreco() {
+        return preco;
     }
 
     @Override
     public String getNome() {
-        return "";
+        return nome;
     }
 }
