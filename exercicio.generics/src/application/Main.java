@@ -32,41 +32,31 @@ public class Main {
             sc.nextLine();
 
             if (escolha == 1) {
-                System.out.print("Qual o nome do Produto: ");
+                System.out.print("Qual o nome do Eletrônico: ");
                 String nome = sc.nextLine();
-                System.out.print("Qual o preço do Produto: ");
+                System.out.print("Qual o preço do Eletrônico: ");
                 Float preco = sc.nextFloat();
                 sc.nextLine();
-                System.out.print("Qual a marca do Produto: ");
+                System.out.print("Qual a marca do Eletrônico: ");
                 String marca = sc.nextLine();
                 produtos.addProduto((T) new Eletronico(nome, preco, marca));
-
-//                System.out.println("\nProduto adicionado com sucesso!");
-//                System.out.println("Nome: " + nome + ", Preço: " + preco + ", Marca: " + marca);
-//                System.out.println("------------------------");
-
-                produtos.obterMaisCaro();
-
             }
 
             if (escolha == 2) {
-                System.out.print("Qual o nome do Produto: ");
+                System.out.print("Qual o titulo do Livro: ");
                 String nomeLivro = sc.nextLine();
-                System.out.print("Qual o preço do Produto: ");
+                System.out.print("Qual o preço do Livro: ");
                 Float precoLivro = sc.nextFloat();
                 sc.nextLine();
                 System.out.print("Qual o Autor do Livro: ");
                 String autor = sc.nextLine();
                 produtos.addProduto((T) new Livro(nomeLivro, precoLivro, autor));
-//                System.out.println("\nProduto adicionado com sucesso!");
-//                System.out.println("Nome: " + nomeLivro + ", Preço: " + precoLivro + ", Autor: " + autor);
-//                System.out.println("------------------------");
             }
 
             if (escolha == 3) {
-                System.out.print("Qual o nome do Produto: ");
+                System.out.print("Qual o nome do Alimento: ");
                 String nomeAlimento = sc.nextLine();
-                System.out.print("Qual o preço do Produto: ");
+                System.out.print("Qual o preço do Alimento: ");
                 Float preconomeAlimento = sc.nextFloat();
                 sc.nextLine();
                 System.out.print("Qual a Data de Validade: ");
@@ -98,10 +88,10 @@ public class Main {
             System.out.println("------------------------");
         }
 
-        System.out.println("Produto mais caro:");
-        System.out.println(produtos.obterMaisCaro());
-        System.out.println("\nProduto mais barato:");
-        System.out.println(produtos.obterMaisBarato());
+        System.out.println("O produto mais caro é: " + produtos.obterMaisCaro().getNome() + ", no valor de: R$" + produtos.obterMaisCaro().getPreco());
+
+        System.out.println("\nO produto mais barato é: " + produtos.obterMaisBarato().getNome() + ", no valor de: R$" + produtos.obterMaisBarato().getPreco());
+
 
 
 

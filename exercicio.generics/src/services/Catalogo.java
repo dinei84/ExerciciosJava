@@ -32,6 +32,7 @@ public class Catalogo <T extends Produto>{
         if (produtoMaisCaro == null){
             throw new IllegalArgumentException("Nenhum produto possui preço valido");
         }
+
         return produtoMaisCaro;
     }
 
