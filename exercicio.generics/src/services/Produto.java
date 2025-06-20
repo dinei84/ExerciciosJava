@@ -3,8 +3,6 @@ package services;
 import java.math.BigDecimal;
 
 public interface Produto {
-
-    Float getPreco();
+    BigDecimal getPreco();
     String getNome();
-
 }
