@@ -5,105 +5,66 @@ import entities.Eletronico;
 import entities.Livro;
 import services.Catalogo;
 import services.Produto;
-import services.ProdutoClass;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static <T extends Produto> void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Catalogo<T> produtos = new Catalogo<T>();
-
-        System.out.println("Vamos adicionar produtos");
-        System.out.print("Quantos produtos quer adicionar: ");
-        int quantidade = sc.nextInt();
-        sc.nextLine();
-
+        Catalogo<Produto> catalogo = new Catalogo<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        for (int i = 0; i < quantidade; i ++ ) {
-            System.out.print("Qual o tipo de produto: 1.Eletronico / 2.Livro / 3.Alimento: ");
-            int escolha = sc.nextInt();
-            sc.nextLine();
+        System.out.print("Quantos produtos deseja adicionar? ");
+        int total = Integer.parseInt(sc.nextLine());
 
-            if (escolha == 1) {
-                System.out.print("Qual o nome do Produto: ");
-                String nome = sc.nextLine();
-                System.out.print("Qual o preço do Produto: ");
-                Float preco = sc.nextFloat();
-                sc.nextLine();
-                System.out.print("Qual a marca do Produto: ");
-                String marca = sc.nextLine();
-                produtos.addProduto((T) new Eletronico(nome, preco, marca));
+        for (int i = 0; i < total; i++) {
+            System.out.print("Tipo (1-Eletrônico, 2-Livro, 3-Alimento): ");
+            int tipo = Integer.parseInt(sc.nextLine());
 
-//                System.out.println("\nProduto adicionado com sucesso!");
-//                System.out.println("Nome: " + nome + ", Preço: " + preco + ", Marca: " + marca);
-//                System.out.println("------------------------");
+            System.out.print("Nome: ");
+            String nome = sc.nextLine();
 
-                produtos.obterMaisCaro();
+            System.out.print("Preço: ");
+            BigDecimal preco = new BigDecimal(sc.nextLine());
 
-            }
-
-            if (escolha == 2) {
-                System.out.print("Qual o nome do Produto: ");
-                String nomeLivro = sc.nextLine();
-                System.out.print("Qual o preço do Produto: ");
-                Float precoLivro = sc.nextFloat();
-                sc.nextLine();
-                System.out.print("Qual o Autor do Livro: ");
-                String autor = sc.nextLine();
-                produtos.addProduto((T) new Livro(nomeLivro, precoLivro, autor));
-//                System.out.println("\nProduto adicionado com sucesso!");
-//                System.out.println("Nome: " + nomeLivro + ", Preço: " + precoLivro + ", Autor: " + autor);
-//                System.out.println("------------------------");
-            }
-
-            if (escolha == 3) {
-                System.out.print("Qual o nome do Produto: ");
-                String nomeAlimento = sc.nextLine();
-                System.out.print("Qual o preço do Produto: ");
-                Float preconomeAlimento = sc.nextFloat();
-                sc.nextLine();
-                System.out.print("Qual a Data de Validade: ");
-                String dataStr = sc.nextLine();
-                Date validade = null;
-                try {
-                    validade = sdf.parse(dataStr);
-                } catch (ParseException e) {
-                    System.out.println("Formato invalido");
+            switch (tipo) {
+                case 1 -> {
+                    System.out.print("Marca: ");
+                    String marca = sc.nextLine();
+                    catalogo.adicionarProduto(new Eletronico(nome, preco, marca));
                 }
-                produtos.addProduto((T) new Alimento(nomeAlimento, preconomeAlimento, validade));
-
+                case 2 -> {
+                    System.out.print("Autor: ");
+                    String autor = sc.nextLine();
+                    catalogo.adicionarProduto(new Livro(nome, preco, autor));
+                }
+                case 3 -> {
+                    System.out.print("Validade (dd/MM/yyyy): ");
+                    try {
+                        Date validade = sdf.parse(sc.nextLine());
+                        catalogo.adicionarProduto(new Alimento(nome, preco, validade));
+                    } catch (ParseException e) {
+                        System.out.println("Data inválida. Produto não adicionado.");
+                    }
+                }
+                default -> System.out.println("Tipo inválido.");
             }
         }
 
-        // Listar todos os produtos adicionados
-        System.out.println("\nProdutos adicionados:");
-        List<T> todosProdutos = produtos.listarProdutos();
-        
-        for (T produto : todosProdutos) {
-            System.out.println("Nome: " + produto.getNome() + ", Preço: " + produto.getPreco());
-            if (produto instanceof Eletronico) {
-                System.out.println("Marca: " + ((Eletronico) produto).getMarca());                
-            } else if (produto instanceof Livro) {
-                System.out.println("Autor: " + ((Livro) produto).getAutor());                
-            } else if (produto instanceof Alimento) {
-                System.out.println("Data de Validade: " + sdf.format(((Alimento) produto).getValidade()));                
-            }
-            System.out.println("------------------------");
+        System.out.println("\n--- Produtos Adicionados ---");
+        for (Produto p : catalogo.listarProdutos()) {
+            System.out.println(p.getNome() + " - R$" + p.getPreco());
         }
 
-        System.out.println("Produto mais caro:");
-        System.out.println(produtos.obterMaisCaro());
-        System.out.println("\nProduto mais barato:");
-        System.out.println(produtos.obterMaisBarato());
+        Produto maisCaro = catalogo.obterMaisCaro();
+        Produto maisBarato = catalogo.obterMaisBarato();
 
-
+        System.out.println("\nMais caro: " + maisCaro.getNome() + " - R$" + maisCaro.getPreco());
+        System.out.println("Mais barato: " + maisBarato.getNome() + " - R$" + maisBarato.getPreco());
 
         sc.close();
     }
