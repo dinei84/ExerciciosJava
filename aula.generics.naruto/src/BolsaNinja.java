@@ -1,4 +1,6 @@
 package PACKAGE_NAME;
 
-public class BolsaNinja {
+public class BolsaNinja<T> {
+    //Iniciar o Array
+
 }
