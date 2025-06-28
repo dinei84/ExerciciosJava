@@ -1,16 +1,15 @@
 package application;
 
-import services.PrintService;
-
 import java.util.Locale;
 import java.util.Scanner;
+import services.PrintService;
 
 public class Main {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        PrintService<String> ps = new PrintService<>();
+        PrintService<Object> ps = new PrintService<>();
 
         System.out.print("How many values?: ");
         int quantity = sc.nextInt();
@@ -25,7 +24,7 @@ public class Main {
 
 
         ps.print();
-        String x = ps.first();
+        Object x = ps.first();
         System.out.println("First: " + x);
 
 
